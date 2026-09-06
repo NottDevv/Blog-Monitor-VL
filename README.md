@@ -105,8 +105,9 @@
 
 ### 🎛️ مرحله ۶: تنظیمات داخل پنل 3x-ui
 1. وارد پنل شوید: `https://domain.com/dashboard/`
-2. در بخش **Panel Settings -> Subscription**: پورت را روی `2065` و مسیر را روی `/sub/` قرار دهید *(مسیر در `nginx.conf` قابل سفارشی‌سازی است)*.
-3. **ساخت اینباند (Inbound):**
+2. در بخش **Panel Settings -> Subscription**:
+   پورت را روی `2065` و مسیر را روی `/sub/` قرار دهید *(مسیر در `nginx.conf` قابل سفارشی‌سازی است)*.
+4. **ساخت اینباند (Inbound):**
    * 🔌 **Port:** مثلاً `8443`
    * 🛣️ **Path:** طبق الگوی Regex به این صورت: `/api/v8443/` *(برای WebSocket با EarlyData: `/api/v8443/?ed=2560`)*
    * 🌐 **Host / External Proxy:** دامنه خودتان، پورت `443` و TLS روشن.
