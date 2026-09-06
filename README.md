@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&height=250&section=header&text=NotDev%203x-ui%20Stealth&fontSize=50&animation=fadeIn&fontAlignY=38&desc=SupportS%20Paas%20with%20persistent%20storage&descAlignY=60&descAlign=50" alt="Header Animation" />
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&height=250&section=header&text=NotDev%203x-ui%20Stealth&fontSize=50&animation=fadeIn&fontAlignY=38&desc=Supports%20Paas%20with%20persistent%20storage&descAlignY=60&descAlign=50" alt="Header Animation" />
 </p>
 
 <p align="center">
