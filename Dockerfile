@@ -18,7 +18,7 @@ RUN rm -rf /usr/share/nginx/html/* \
 
 # ۲. نصب 3x-ui
 WORKDIR /usr/local/x-ui
-RUN wget https://github.com/MHSanaei/3x-ui/releases/download/v3.6.0/x-ui-linux-amd64.tar.gz \
+RUN wget https://github.com/MHSanaei/3x-ui/releases/download/v3.7.0/x-ui-linux-amd64.tar.gz \
     && tar -zxvf x-ui-linux-amd64.tar.gz -C /tmp/ \
     && mv /tmp/x-ui/x-ui . \
     && mv /tmp/x-ui/bin . \
