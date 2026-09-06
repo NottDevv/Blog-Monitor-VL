@@ -17,16 +17,16 @@
   <img src="https://img.shields.io/badge/Ubuntu-E95420?style=for-the-badge&logo=ubuntu&logoColor=white" alt="Ubuntu" />
 </p>
 
-<br>
+
 ---
 
-<br>
+
 
 <h3 align="center">
   <mark>یک نسخه بهینه شده از پنل 3x-ui برای اجرا روی پلتفرم‌های ابری با حافظه دائمی</mark>
 </h3>
 
-<br>
+
 ---
 
 <br>
