@@ -34,26 +34,20 @@
 <div dir="rtl">
 
 ### 🌐 وب‌سرور چندمنظوره (Multi-Protocol Nginx)
-پیکربندی جامع `nginx.conf` جهت مدیریت همزمان پروتکل‌های مختلف:
-* 🔌 پروتکل **WebSocket (WS) & HTTPUpgrade:** پشتیبانی کامل از WS و حالت بهینه‌تر HTTPUpgrade برای پایداری در شبکه.
+* 🧰 پیکربندی جامع `nginx.conf` جهت مدیریت همزمان پروتکل‌های مختلف:
+* 🔌 پروتکل **WebSocket (WS) & HTTPUpgrade:** پشتیبانی از WS و حالت بهینه‌ HTTPUpgrade برای پایداری شبکه.
 * ⚡ پروتکل **XHTTP:** پشتیبانی در تمام مدهای `packet-up` و `stream-up` با قابلیت `request_buffering off`.
 * 🛡️ پروتکل **gRPC:** هندل کردن ترافیک gRPC در پورت و مسیر مجزا.
 * 🔀 **مسیردهی هوشمند (Regex Routing):** هدایت خودکار ترافیک به پورت‌های داخلی بر اساس URL (مثلاً `/api/v8443/` به پورت ۸۴۴۳) بدون نیاز به تغییر کانفیگ Nginx.
-
 <br>
-
 ### 🎭 استتار و شخصی‌سازی (Cloaking & Branding)
 * 🏛️ **صفحه فرود (Landing Page):** ادغام خودکار قالب Bootstrap در صفحه اصلی جهت ایجاد سایت استتار معتبر و عبور از سیستم‌های DPI.
 * 🎨 **تزریق هویت (Injection):** تغییر داینامیک تایتل مرورگر و Favicon پنل بر اساس متغیر `CUSTOM_TITLE` با استفاده از `sub_filter`.
-
 <br>
-
 ### 🐳 زیرساخت داکر و CI/CD
 * 📦 متغیر **Dockerization:** استفاده از Custom Dockerfile جهت دسترسی و کنترل کامل روی لایه‌های سیستم‌عامل.
 * 🚀 متغیر **GitHub Actions:** اتوماسیون کامل `docker-publish.yml` برای بیلد و انتشار خودکار ایمیج در GHCR.
-
 <br>
-
 ### ⚙️ متغیرها و تنظیمات داینامیک
 * 🔒 **مسیر داینامیک پنل (`PANEL_PATH`):** قابلیت تغییر آدرس ورودی پنل جهت جلوگیری از اسکنرها و حملات Brute-Force.
 * 🔗 **تنظیمات پویای سابسکریپشن (`SUB_PATH` & `SUB_PORT`):** شخصی‌سازی مسیر و پورت داخلی لینک سابسکریپشن از طریق متغیرها.
@@ -157,6 +151,121 @@
 *   درصورت متصل نکردن یک **Presistent Volume** با هر بار دیپلوی یا ریستارت، تمام یوزرها پاک خواهند شد.
 *   **منطق پورت‌ها:** منطق پورت‌های اتصالی (`target_port`) کماکان حفظ شده است. هر پورتی که در اینباند پنل بسازید، به انتهای `API_PREFIX` اضافه می‌شود.
 *   **اسلش نهایی:** در هنگام استفاده از `API_PREFIX` در اپلیکیشن‌های گوشی، حتماً علامت **`/`** را در انتهای آدرس (بعد از پورت) قرار دهید. مثال: `domain.com/api/v8443/`
+
+# معماری و ساختار کانتینر
+
+## 1. Dockerfile
+
+ساختار کلی این است:
+
+- **پایه:** `ubuntu:22.04`
+- نصب `nginx`, `curl`, `wget`, `git`, `gettext-base` و ابزارهای لازم
+- ایجاد `/etc/x-ui` برای دیتابیس Persistent
+- دانلود سایت استتار از StartBootstrap
+- نصب نسخه `3.7.0` از `3x-ui`
+- قرار دادن `x-ui` و `bin` در `/usr/local/x-ui`
+- کپی کردن `nginx.conf` و `entrypoint.sh`
+- اجرای همه‌چیز از طریق `entrypoint.sh`
+- **پورت Docker:** `8080`
+
+> این بخش در خطوط 21 تا 39 مشخص شده است.
+> 
+> **نکته مهم:** خود Dockerfile پورت backend پنل را 3000 نمی‌کند؛ این کار بعداً در `entrypoint.sh` انجام می‌شود.
+
+---
+
+## 2. entrypoint.sh
+
+این فایل در واقع مرکز کنترل کل کانتینر است.
+
+### ترتیب اجرای آن:
+
+```text
+Container Start
+      ↓
+Environment Variables
+      ↓
+بررسی /etc/x-ui/x-ui.db
+      ↓
+Symlink → /usr/local/x-ui/x-ui.db
+      ↓
+ساخت nginx.conf از template
+      ↓
+جایگزینی متغیرها
+      ↓
+x-ui → port 3000
+      ↓
+x-ui → webBasePath
+      ↓
+اجرای x-ui
+      ↓
+اجرای nginx روی 8080
+```
+
+### بخش Persistent Database
+
+منطقی است:
+
+```bash
+if [ ! -f "/etc/x-ui/x-ui.db" ]; then
+    touch /etc/x-ui/x-ui.db
+fi
+
+ln -sf /etc/x-ui/x-ui.db /usr/local/x-ui/x-ui.db
+```
+
+یعنی دیتابیس داخل Volume باقی می‌ماند و با حذف/recreate شدن Container از بین نمی‌رود.
+
+### مدیریت مسیر پنل
+
+همچنین مسیر پنل از environment گرفته می‌شود:
+
+```bash
+PANEL_PATH=${PANEL_PATH:-/dashboard/}
+```
+
+و بعد همان مقدار هم به Nginx و هم به خود x-ui داده می‌شود:
+
+```bash
+./x-ui setting -webBasePath "$PANEL_PATH"
+```
+
+> این هماهنگی خیلی مهم است.
+
+---
+
+## 3. nginx.conf
+
+اینجا قسمت پیچیده پروژه است. چهار نوع ترافیک عملاً در نظر گرفته شده:
+
+```text
+                     Nginx :8080
+                           │
+            ┌──────────────┼──────────────┐
+            │              │              │
+            ↓              ↓              ↓
+        Decoy Site       x-ui          Subscription
+          /             /dashboard       /sub
+                           │
+                           ↓
+                      127.0.0.1:3000
+```
+
+### Router داینامیک برای Inboundها
+
+و سپس یک Router داینامیک برای اینباندها وجود دارد:
+
+```text
+/api/v<PORT>/...
+        │
+        ├── HTTP / WS / XHTTP
+        │       ↓
+        │   127.0.0.1:<PORT>
+        │
+        └── gRPC
+                ↓
+          grpc_pass
+```
 
 ### 🏗 ساختار فایل‌های جدید:
 
