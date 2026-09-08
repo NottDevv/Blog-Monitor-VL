@@ -4,6 +4,7 @@
 export PORT=${PORT:-8080}
 export FINAL_TITLE=${CUSTOM_TITLE:-Web Monitor}
 export PANEL_PATH=${PANEL_PATH:-/dashboard/}
+export PANEL_PATH_NO_SLASH="${PANEL_PATH%/}"
 export SUB_PATH=${SUB_PATH:-/sub/}
 export SUB_PORT=${SUB_PORT:-2065}
 export API_PREFIX=${API_PREFIX:-/api/v}
@@ -13,7 +14,6 @@ echo ">>> Starting setup with Persistent Volume Support..."
 # ----------------------------------------------------------------
 # بخش 1: مدیریت دیتابیس روی Volume
 # ----------------------------------------------------------------
-# بررسی وجود دیتابیس در Volume (مسیر /etc/x-ui باید مونت شده باشد)
 if [ ! -f "/etc/x-ui/x-ui.db" ]; then
     echo ">>> Initializing fresh database on volume..."
     touch /etc/x-ui/x-ui.db
@@ -32,6 +32,7 @@ cp /etc/nginx/nginx.conf.template /etc/nginx/nginx.conf
 # جایگذاری متغیرها در فایل تنظیمات Nginx
 sed -i "s|_TITLE_HERE_|$FINAL_TITLE|g" /etc/nginx/nginx.conf
 sed -i "s|_PANEL_PATH_|$PANEL_PATH|g" /etc/nginx/nginx.conf
+sed -i "s|_PANEL_PATH_NO_SLASH_|$PANEL_PATH_NO_SLASH|g" /etc/nginx/nginx.conf
 sed -i "s|_SUB_PATH_|$SUB_PATH|g" /etc/nginx/nginx.conf
 sed -i "s|_SUB_PORT_|$SUB_PORT|g" /etc/nginx/nginx.conf
 sed -i "s|_API_PREFIX_|$API_PREFIX|g" /etc/nginx/nginx.conf
@@ -42,7 +43,6 @@ sed -i "s|_API_PREFIX_|$API_PREFIX|g" /etc/nginx/nginx.conf
 echo "Configuring x-ui..."
 cd /usr/local/x-ui
 
-# تنظیم پورت داخلی و مسیر وب (استفاده از متغیر PANEL_PATH)
 ./x-ui setting -port 3000
 ./x-ui setting -webBasePath "$PANEL_PATH"
 
