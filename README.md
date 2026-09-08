@@ -42,8 +42,8 @@
 
 ### 🐳 زیرساخت Docker و CI/CD
 
-- 📦 **Dockerization:** استفاده از Custom Dockerfile جهت دسترسی و کنترل کامل روی لایه‌های سیستم‌عامل.
-- 🚀 **GitHub Actions:** اتوماسیون کامل `docker-publish.yml` برای بیلد و انتشار خودکار ایمیج در GHCR.
+- 📦 متغیر **Dockerization:** استفاده از Custom Dockerfile جهت دسترسی و کنترل کامل روی لایه‌های سیستم‌عامل.
+- 🚀 متغیر **GitHub Actions:** اتوماسیون کامل `docker-publish.yml` برای بیلد و انتشار خودکار ایمیج در GHCR.
 
 ### ⚙️ متغیرها و تنظیمات داینامیک
 
@@ -75,7 +75,7 @@
 
 1. کدها را Push کنید و در تب **Actions** منتظر تیک سبز بمانید.
 2. به بخش **Packages** در پروفایل گیت‌هاب خود رفته، پکیج را باز کنید و در بخش Settings وضعیت آن را به **Public** تغییر دهید تا پلتفرم ابری دسترسی داشته باشد.
-
+</div>
 ### ☁️ مرحله ۴: دپلوی در سرویس ابری
 
 یک سرویس جدید از روی ایمیج ایجاد کرده و متغیرهای زیر را در بخش **Environment Variables** تنظیم کنید:
@@ -100,31 +100,31 @@
 2. در بخش **Panel Settings → Subscription**:
    - پورت را روی `2065` و مسیر را روی `/sub/` قرار دهید؛ مسیر در `nginx.conf` قابل سفارشی‌سازی است.
 3. **ساخت Inbound:**
-   - 🔌 **Port:** مثلاً `8443`
-   - 🛣️ **Path:** طبق الگوی Regex به این صورت: `/api/v8443/`
+   - 🔌متغیر **Port:** مثلاً `8443`
+   - 🛣️ متغیر **Path:** طبق الگوی Regex به این صورت: `/api/v8443/`
    - برای WebSocket با EarlyData: `/api/v8443/?ed=2560`
-   - 🌐 **Host / External Proxy:** دامنه خودتان، پورت `443` و TLS روشن.
+   - 🌐 متغیر **Host / External Proxy:** دامنه خودتان، پورت `443` و TLS روشن.
 
 ### ⚙️ راهنمای تنظیمات بخش Subscription در پنل 3X-UI
 
 برای اینکه لینک‌های سابسکریپشن از طریق پروکسی معکوس، مانند Nginx، به‌درستی کار کنند، فیلدهای بخش تنظیمات سابسکریپشن را مطابق نمونه زیر با اطلاعات واقعی سرور خود پر کنید:
 
-#### 🌐 Listen Domain (دامنه شنود)
+#### 🌐 متغیر Listen Domain (دامنه شنود)
 
 - **توضیح:** نام دامنه اصلی یا لوکال هاست برای سرویس سابسکریپشن.
 - **مثال:** `your-domain.up.railway.app`
 
-#### 🔌 Listen Port (پورت شنود)
+#### 🔌 متغیر Listen Port (پورت شنود)
 
 - **توضیح:** باید دقیقاً با پورتی که در متغیرهای محیطی برای سابسکریپشن (`SUB_PORT`) تعیین کرده‌اید، همخوانی داشته باشد.
 - **مثال:** `2065`
 
-#### 📁 URI Path (مسیر URI)
+#### 📁 متغیر URI Path (مسیر URI)
 
 - **توضیح:** باید دقیقاً مشابه مسیری باشد که در متغیر `SUB_PATH` و فایل Nginx تنظیم شده است؛ حتماً با اسلش در ابتدا و انتها آغاز و تمام شود.
 - **مثال:** `/asset/`
 
-#### 🔗 Reverse Proxy URI (آدرس پروکسی معکوس)
+#### 🔗 متغیر Reverse Proxy URI (آدرس پروکسی معکوس)
 
 - **توضیح:** آدرس کامل و نهایی دسترسی به سابسکریپشن شامل پروتکل، دامنه و مسیر.
 - **مثال:** `https://your-domain.up.railway.app/asset/`
@@ -132,7 +132,7 @@
 #### ⚠️ نکات مهم gRPC
 
 - **عدم استفاده از اسلش:** برخلاف WebSocket، در بخش **Service Name** نیازی به گذاشتن `/` در ابتدا یا انتهای عبارت نیست؛ مثلاً `api/v2083` درست است، نه `/api/v2083/`.
-- **Multi-Multiplexing:** ترافیک gRPC به دلیل مالتی‌پلاکسینگ عملکرد فوق‌العاده‌ای روی اتصالات ابری دارد و برای عبور از فیلترینگ شدید بسیار مناسب است.
+- متغیر **Multi-Multiplexing:** ترافیک gRPC به دلیل مالتی‌پلاکسینگ عملکرد فوق‌العاده‌ای روی اتصالات ابری دارد و برای عبور از فیلترینگ شدید بسیار مناسب است.
 
 ### 📱 مرحله ۷: تنظیمات کلاینت (گوشی کاربر)
 
@@ -198,9 +198,9 @@ x-ui → port 3000
       ↓
 x-ui → webBasePath
       ↓
-اجرای x-ui
+Running x-ui
       ↓
-اجرای nginx روی 8080
+Running nginx on  8080
 ```
 
 #### بخش Persistent Database
@@ -268,37 +268,23 @@ PANEL_PATH=${PANEL_PATH:-/dashboard/}
 
 ### 🏗️ ساختار فایل‌های جدید
 
-- ⚙️ **`entrypoint.sh`:** وظیفه جایگذاری (Inject) متغیرها در فایل `nginx.conf` با استفاده از دستور `sed` و تنظیم `webBasePath` پنل را بر عهده دارد.
-- 🌐 **`nginx.conf.template`:** به‌عنوان یک قالب عمل می‌کند و اجازه می‌دهد تمام مسیرها به‌صورت داینامیک ساخته شوند.
+- ⚙️ متغیر **`entrypoint.sh`:** وظیفه جایگذاری (Inject) متغیرها در فایل `nginx.conf` با استفاده از دستور `sed` و تنظیم `webBasePath` پنل را بر عهده دارد.
+- 🌐 متغیر **`nginx.conf.template`:** به‌عنوان یک قالب عمل می‌کند و اجازه می‌دهد تمام مسیرها به‌صورت داینامیک ساخته شوند.
+
+  ---
+
+### 📜 License
+
+> **MIT License**
+> 
+> This project is open-source and available under the **[MIT License](LICENSE)**.  
+Feel free to use, modify, and distribute it.
+> 
+>
+> <a href="LICENSE">
+> <img src="https://img.shields.io/badge/License-MIT-emerald?style=for-the-badge&logo=open-source-initiative&logoColor=white" alt="MIT License" />
+> </a>
 
 ---
 
-## 📄 License
 
-این پروژه تحت لایسنس **MIT** منتشر می‌شود.
-
-```text
-MIT License
-
-Copyright (c) 2026 NotDev
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-```
-
-</div>
