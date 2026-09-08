@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&height=250&section=header&text=NotDev%203x-ui%20Stealth&fontSize=50&animation=fadeIn&fontAlignY=38&desc=Supports%20Paas%20with%20persistent%20storage&descAlignY=60&descAlign=50" alt="Header Animation" />
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&height=250&section=header&text=NotDev%203x-ui%20Stealth&fontSize=50&animation=fadeIn&fontAlignY=38&desc=Supports%20PaaS%20with%20persistent%20storage&descAlignY=60&descAlign=50" alt="Header Animation" />
 </p>
 
 <p align="center">
@@ -17,147 +17,123 @@
   <img src="https://img.shields.io/badge/Ubuntu-E95420?style=for-the-badge&logo=ubuntu&logoColor=white" alt="Ubuntu" />
 </p>
 
-
 ---
-
-
 
 <h3 align="center">
   <mark>یک پکیج راه‌اندازی بهینه برای اجرای پنل 3x-ui روی پلتفرم‌های ابری با حافظه دائمی</mark>
 </h3>
 
-
 ---
-
-<br>
 
 <div dir="rtl">
 
 ### 🌐 وب‌سرور چندمنظوره (Multi-Protocol Nginx)
-* 🧰 پیکربندی جامع `nginx.conf` جهت مدیریت همزمان پروتکل‌های مختلف:
-* 🔌 پروتکل **WebSocket (WS) & HTTPUpgrade:** پشتیبانی از WS و حالت بهینه‌ HTTPUpgrade برای پایداری شبکه.
-* ⚡ پروتکل **XHTTP:** پشتیبانی در تمام مدهای `packet-up` و `stream-up` با قابلیت `request_buffering off`.
-* 🛡️ پروتکل **gRPC:** هندل کردن ترافیک gRPC در پورت و مسیر مجزا.
-* 🔀 **مسیردهی هوشمند (Regex Routing):** هدایت خودکار ترافیک به پورت‌های داخلی بر اساس URL (مثلاً `/api/v8443/` به پورت ۸۴۴۳) بدون نیاز به تغییر کانفیگ Nginx.
-<br>
+- 🧰 **پیکربندی جامع:** مدیریت همزمان پروتکل‌های مختلف در `nginx.conf`.
+- 🔌 **WebSocket (WS) & HTTPUpgrade:** پشتیبانی از WS و حالت بهینه‌ی HTTPUpgrade برای پایداری شبکه.
+- ⚡ **پروتکل XHTTP:** پشتیبانی در تمام مدهای `packet-up` و `stream-up` با قابلیت `request_buffering off`.
+- 🛡️ **پروتکل gRPC:** هندل کردن ترافیک gRPC در پورت و مسیر مجزا.
+- 🔀 **مسیردهی هوشمند (Regex Routing):** هدایت خودکار ترافیک به پورت‌های داخلی بر اساس URL (مثلاً `/api/v8443/` به پورت `8443`) بدون نیاز به تغییر کانفیگ Nginx.
+
 ### 🎭 استتار و شخصی‌سازی (Cloaking & Branding)
-* 🏛️ **صفحه فرود (Landing Page):** ادغام خودکار قالب Bootstrap در صفحه اصلی جهت ایجاد سایت استتار معتبر و عبور از سیستم‌های DPI.
-* 🎨 **تزریق هویت (Injection):** تغییر داینامیک تایتل مرورگر و Favicon پنل بر اساس متغیر `CUSTOM_TITLE` با استفاده از `sub_filter`.
-<br>
+- 🏛️ **صفحه فرود (Landing Page):** ادغام خودکار قالب Bootstrap در صفحه اصلی جهت ایجاد سایت استتار معتبر و عبور از سیستم‌های DPI.
+- 🎨 **تزریق هویت (Injection):** تغییر داینامیک تایتل مرورگر و Favicon پنل بر اساس متغیر `CUSTOM_TITLE` با استفاده از `sub_filter`.
+
 ### 🐳 زیرساخت داکر و CI/CD
-* 📦 متغیر **Dockerization:** استفاده از Custom Dockerfile جهت دسترسی و کنترل کامل روی لایه‌های سیستم‌عامل.
-* 🚀 متغیر **GitHub Actions:** اتوماسیون کامل `docker-publish.yml` برای بیلد و انتشار خودکار ایمیج در GHCR.
-<br>
+- 📦 **Dockerization:** استفاده از Custom Dockerfile جهت دسترسی و کنترل کامل روی لایه‌های سیستم‌عامل.
+- 🚀 **GitHub Actions:** اتوماسیون کامل `docker-publish.yml` برای بیلد و انتشار خودکار ایمیج در GHCR.
+
 ### ⚙️ متغیرها و تنظیمات داینامیک
-* 🔒 **مسیر داینامیک پنل (`PANEL_PATH`):** قابلیت تغییر آدرس ورودی پنل جهت جلوگیری از اسکنرها و حملات Brute-Force.
-* 🔗 **تنظیمات پویای سابسکریپشن (`SUB_PATH` & `SUB_PORT`):** شخصی‌سازی مسیر و پورت داخلی لینک سابسکریپشن از طریق متغیرها.
-* 📡 **پیشوند اتصال قابل تنظیم (`API_PREFIX`):** تغییر داینامیک عبارت قبل از پورت (مانند `/api/v/`) جهت ایجاد الگوهای ترافیکی جدید.
-* 💾 **یکپارچه‌سازی با Volume:** ذخیره و لینک تلقائی دیتابیس در مسیر `/etc/x-ui/` جهت ماندگاری داده‌ها هنگام ریستارت کانتینر.
+- 🔒 **مسیر داینامیک پنل (`PANEL_PATH`):** قابلیت تغییر آدرس ورودی پنل جهت جلوگیری از اسکنرها و حملات Brute-Force.
+- 🔗 **تنظیمات پویای سابسکریپشن (`SUB_PATH` و `SUB_PORT`):** شخصی‌سازی مسیر و پورت داخلی لینک سابسکریپشن از طریق متغیرها.
+- 📡 **پیشوند اتصال قابل تنظیم (`API_PREFIX`):** تغییر داینامیک عبارت قبل از پورت (مانند `/api/v/`) جهت ایجاد الگوهای ترافیکی جدید.
+- 💾 **یکپارچه‌سازی با Volume:** ذخیره و لینک تلقائی دیتابیس در مسیر `/etc/x-ui/` جهت ماندگاری داده‌ها هنگام ریستارت کانتینر.
 
 </div>
 
 ---
 
+## 🛠️ راهنمای کامل راه‌اندازی پروژه از صفر
 
-## 🛠️ راهنمای کامل راه‌اندازی پروژه از صفر (نسخه نهایی)
+<div dir="rtl">
 
 ### 📌 مرحله ۱: آماده‌سازی در GitHub
-1. **ساخت مخزن خصوصی (Private Repository):**  
-   یک ریپازیتوری بسازید (مثلاً `x-project`).
+1. **ساخت مخزن خصوصی (Private Repository):** یک ریپازیتوری جدید بسازید (مثلاً `x-project`).
 
 ### 📁 مرحله ۲: ساخت فایل‌های مخزن
 فایل‌های زیر را در ریشه (Root) مخزن قرار دهید:
-* 📄 `Dockerfile`
-* ⚙️ `entrypoint.sh`
-* 🌐 `nginx.conf`
-* 🖼️ `favicon.ico`
-* 🚀 `.github/workflows/docker-publish.yml`
+- 📄 `Dockerfile`
+- ⚙️ `entrypoint.sh`
+- 🌐 `nginx.conf` (یا `nginx.conf.template`)
+- 🖼️ `favicon.ico`
+- 🚀 `.github/workflows/docker-publish.yml`
 
 ### 🏗️ مرحله ۳: بیلد و انتشار ایمیج
 1. کدها را Push کنید و در تب **Actions** منتظر تیک سبز بمانید.
-2. به بخش **Packages** در پروفایل گیت‌هاب خود رفته، پکیج را باز کنید و در بخش Settings وضعیت آن را به **Public** تغییر دهید تا پلتفرم ابری دسترسی داشته باشد.
-
-</div>
+2. به بخش **Packages** در پروفایل گیت‌هاب خود رفته، پکیج را باز کنید و در بخش Settings، وضعیت آن را به **Public** تغییر دهید تا پلتفرم ابری دسترسی داشته باشد.
 
 ### ☁️ مرحله ۴: دپلوی در سرویس ابری
 یک سرویس جدید از روی ایمیج ایجاد کرده و متغیرهای زیر را در بخش **Environment Variables** تنظیم کنید:
 
+</div>
+
 | نام متغیر | نقش در سیستم | مقدار پیش‌فرض |
 | :--- | :--- | :--- |
-| **`PANEL_PATH`** | مسیر اختصاصی ورود به پنل مدیریت | `/dashboard/` |
-| **`SUB_PATH`** | مسیر لینک سابسکریپشن | `/sub/` |
-| **`SUB_PORT`** | پورت داخلی سابسکریپشن | `2065` |
-| **`API_PREFIX`** | پیشوند قبل از عدد پورت در کانکشن‌ها | `/api/v` |
-| **`CUSTOM_TITLE`** | عنوان دلخواه برای تب مرورگر | `Web Monitor` |
+| `PANEL_PATH` | مسیر اختصاصی ورود به پنل مدیریت | `/dashboard/` |
+| `SUB_PATH` | مسیر لینک سابسکریپشن | `/sub/` |
+| `SUB_PORT` | پورت داخلی سابسکریپشن | `2065` |
+| `API_PREFIX` | پیشوند قبل از عدد پورت در کانکشن‌ها | `/api/v` |
+| `CUSTOM_TITLE` | عنوان دلخواه برای تب مرورگر | `Web Monitor` |
 
 <div dir="rtl">
-  
+
 ### 🌐 مرحله ۵: تنظیمات دامنه و Cloudflare
-1. دامنه اختصاصی خود را در سرویس ابری (مانند Koyeb/Railway) اضافه کنید.
-2. در پنل کلادفلر یک رکورد **CNAME** به آدرس ارائه شده بزنید و ابر پروکسی (Orange Cloud) را **روشن** کنید.
+1. دامنه اختصاصی خود را در سرویس ابری (مانند Koyeb یا Railway) اضافه کنید.
+2. در پنل کلادفلر یک رکورد **CNAME** به آدرس ارائه‌شده بزنید و ابر پروکسی (Orange Cloud) را **روشن** کنید.
 3. وضعیت SSL/TLS را حتماً روی حالت **Full** یا **Full (Strict)** قرار دهید.
 
 ### 🎛️ مرحله ۶: تنظیمات داخل پنل 3x-ui
 1. وارد پنل شوید: `https://domain.com/dashboard/`
 2. در بخش **Panel Settings -> Subscription**:
- پورت را روی `2065` و مسیر را روی `/sub/` قرار دهید *(مسیر در `nginx.conf` قابل سفارشی‌سازی است)*.
+   - پورت را روی `2065` و مسیر را روی `/sub/` قرار دهید *(مسیر در `nginx.conf` قابل سفارشی‌سازی است)*.
 3. **ساخت اینباند (Inbound):**
-   * 🔌 متغیر **Port:** مثلاً `8443`
-   * 🛣️ متغیر **Path:** طبق الگوی Regex به این صورت: `/api/v8443/` *(برای WebSocket با EarlyData: `/api/v8443/?ed=2560`)*
-   * 🌐 متغیر **Host / External Proxy:** دامنه خودتان، پورت `443` و TLS روشن.
-  
-  
-### ⚙️ راهنمای تنظیمات بخش Subscription در پنل 3X-UI
+   - 🔌 **Port:** مثلاً `8443`
+   - 🛣️ **Path:** طبق الگوی Regex به این صورت: `/api/v8443/` *(برای WebSocket با EarlyData: `/api/v8443/?ed=2560`)*
+   - 🌐 **Host / External Proxy:** دامنه خودتان، پورت `443` و TLS روشن.
 
-برای اینکه لینک‌های سابسکریپشن از طریق پروکسی معکوس (مانند Nginx) به درستی کار کنند، فیلدهای بخش تنظیمات سابسکریپشن را مطابق نمونه‌ی زیر با اطلاعات واقعی سرور خود پر کنید:
+### ⚙️ راهنمای تنظیمات بخش Subscription در پنل
+برای اینکه لینک‌های سابسکریپشن از طریق پروکسی معکوس (مانند Nginx) به درستی کار کنند، فیلدهای زیر را مطابق نمونه پر کنید:
 
-* 🌐 متغیر **Listen Domain (دامنه شنود)**
-  * **توضیح:** نام دامنه اصلی یا لوکال هاست برای سرویس سابسکریپشن.
-  * **مثال:** `your-domain.up.railway.app`
+- 🌐 **Listen Domain (دامنه شنود):** نام دامنه اصلی یا لوکال هاست برای سرویس سابسکریپشن. (مثال: `your-domain.up.railway.app`)
+- 🔌 **Listen Port (پورت شنود):** باید دقیقاً با پورتی که در متغیرهای محیطی (`SUB_PORT`) تعیین کرده‌اید، همخوانی داشته باشد. (مثال: `2065`)
+- 📁 **URI Path (مسیر URI):** باید دقیقاً مشابه مسیری باشد که در متغیر `SUB_PATH` و فایل Nginx تنظیم شده است (حتماً با اسلش در ابتدا و انتها). (مثال: `/sub/`)
+- 🔗 **Reverse Proxy URI (آدرس پروکسی معکوس):** آدرس کامل و نهایی دسترسی به سابسکریپشن شامل پروتکل، دامنه و مسیر. (مثال: `https://your-domain.up.railway.app/sub/`)
 
-* 🔌 متغیر **Listen Port (پورت شنود)**
-  * **توضیح:** باید دقیقاً با پورتی که در متغیرهای محیطی برای سابسکریپشن (`SUB_PORT`) تعیین کرده‌اید، همخوانی داشته باشد[cite: 1].
-  * **مثال:** `2065`
-
-* 📁 متغیر **URI Path (مسیر URI)**
-  * **توضیح:** باید دقیقاً مشابه مسیری باشد که در متغیر `SUB_PATH` و فایل Nginx تنظیم شده است (حتماً با اسلش در ابتدا و انتها آغاز و تمام شود)[cite: 1].
-  * **مثال:** `/asset/`
-
-* 🔗 متغیر **Reverse Proxy URI (آدرس پروکسی معکوس)**
-  * **توضیح:** آدرس کامل و نهایی دسترسی به سابسکریپشن شامل پروتکل، دامنه و مسیر.
-  * **مثال:** `https://your-domain.up.railway.app/asset/`
-
-
-   * ⚠️ نکات مهم gRPC:
-* **عدم استفاده از اسلش:** برخلاف WebSocket، در بخش **Service Name** نیازی به گذاشتن `/` در ابتدا یا انتهای عبارت نیست (مثلاً `api/v2083` درست است، نه `/api/v2083/`).
-* متغیر **Multi-Multiplexing:** ترافیک gRPC به دلیل مالتی‌پلاکسینگ عملکرد فوق‌العاده‌ای روی اتصالات ابری دارد و برای عبور از فیلترینگ شدید بسیار مناسب است.
+> ⚠️ **نکات مهم gRPC:**
+> - **عدم استفاده از اسلش:** برخلاف WebSocket، در بخش **Service Name** نیازی به گذاشتن `/` در ابتدا یا انتهای عبارت نیست (مثلاً `api/v2083` درست است، نه `/api/v2083/`).
+> - **Multi-Multiplexing:** ترافیک gRPC به دلیل مالتی‌پلاکسینگ، عملکرد فوق‌العاده‌ای روی اتصالات ابری دارد و برای عبور از فیلترینگ شدید بسیار مناسب است.
 
 ### 📱 مرحله ۷: تنظیمات کلاینت (گوشی کاربر)
-1. لینک سابسکریپشن را وارد نرم‌افزار (مانند Karing ،v2rayNG یا Streisand) کنید.
+1. لینک سابسکریپشن را وارد نرم‌افزار (مانند Karing، v2rayNG یا Streisand) کنید.
 2. **نکات بهینه‌سازی شبکه:**
-   * در صورت اختلال، آدرس سرور (Address) را به یک **Clean IP کلادفلر** تغییر دهید.
-   * مقادیر **SNI** و **Host** حتماً روی دامنه خودتان تنظیم شده باشد.
-   * قابلیت **Fragment** را با بازه طول `10-20` و تاخیر `10-20` فعال کنید.
+   - در صورت اختلال، آدرس سرور (Address) را به یک **Clean IP کلادفلر** تغییر دهید.
+   - مقادیر **SNI** و **Host** حتماً روی دامنه خودتان تنظیم شده باشد.
+   - قابلیت **Fragment** را با بازه طول `10-20` و تاخیر `10-20` فعال کنید.
+
 ---
 
-## 📌 نکات کلیدی نگهداری
-* **امنیت:** به دلیل Private بودن مخازن و استفاده از Docker Registry، هیچ ردپایی از کدهای داخلی شما در اینترنت عمومی وجود ندارد.
+## 📌 نکات کلیدی نگهداری و امنیت
 
+- 🔒 **امنیت کد:** به دلیل Private بودن مخزن و استفاده از Docker Registry، هیچ ردپایی از کدهای داخلی شما در اینترنت عمومی وجود ندارد.
+- 💾 **تنظیم Volume:** حتماً در تنظیمات کانتینر، پوشه `/etc/x-ui` را به یک **Persistent Volume** متصل کنید. در صورت عدم اتصال، با هر بار دیپلوی یا ریستارت، تمام کاربران پاک خواهند شد.
+- 🔢 **منطق پورت‌ها:** منطق پورت‌های اتصالی (`target_port`) کماکان حفظ شده است. هر پورتی که در اینباند پنل بسازید، به انتهای `API_PREFIX` اضافه می‌شود.
+- 📏 **اسلش نهایی:** در هنگام استفاده از `API_PREFIX` در اپلیکیشن‌های گوشی، حتماً علامت `/` را در انتهای آدرس (بعد از پورت) قرار دهید. مثال: `domain.com/api/v8443/`
 
+---
 
-### ⚠️ نکات بسیار مهم برای راه‌اندازی:
+## 🏗️ معماری و ساختار کانتینر
 
-*   **تنظیم Volume:** حتماً در تنظیمات کانتینر خود، پوشه `/etc/x-ui` را به یک **Persistent Volume** متصل کنید.
-*   درصورت متصل نکردن یک **Presistent Volume** با هر بار دیپلوی یا ریستارت، تمام یوزرها پاک خواهند شد.
-*   **منطق پورت‌ها:** منطق پورت‌های اتصالی (`target_port`) کماکان حفظ شده است. هر پورتی که در اینباند پنل بسازید، به انتهای `API_PREFIX` اضافه می‌شود.
-*   **اسلش نهایی:** در هنگام استفاده از `API_PREFIX` در اپلیکیشن‌های گوشی، حتماً علامت **`/`** را در انتهای آدرس (بعد از پورت) قرار دهید. مثال: `domain.com/api/v8443/`
-
-# معماری و ساختار کانتینر
-
-## 1. Dockerfile
-
+### 1. Dockerfile
 ساختار کلی این است:
-
 - **پایه:** `ubuntu:22.04`
 - نصب `nginx`, `curl`, `wget`, `git`, `gettext-base` و ابزارهای لازم
 - ایجاد `/etc/x-ui` برای دیتابیس Persistent
@@ -168,18 +144,13 @@
 - اجرای همه‌چیز از طریق `entrypoint.sh`
 - **پورت Docker:** `8080`
 
-> این بخش در خطوط 21 تا 39 مشخص شده است.
-> 
+> 💡 این بخش در خطوط 21 تا 39 مشخص شده است.
 > **نکته مهم:** خود Dockerfile پورت backend پنل را 3000 نمی‌کند؛ این کار بعداً در `entrypoint.sh` انجام می‌شود.
 
----
-
-## 2. entrypoint.sh
-
+### 2. entrypoint.sh
 این فایل در واقع مرکز کنترل کل کانتینر است.
 
-### ترتیب اجرای آن:
-
+**ترتیب اجرای آن:**
 ```text
 Container Start
       ↓
@@ -202,10 +173,7 @@ x-ui → webBasePath
 اجرای nginx روی 8080
 ```
 
-### بخش Persistent Database
-
-منطقی است:
-
+**بخش Persistent Database:**
 ```bash
 if [ ! -f "/etc/x-ui/x-ui.db" ]; then
     touch /etc/x-ui/x-ui.db
@@ -213,30 +181,20 @@ fi
 
 ln -sf /etc/x-ui/x-ui.db /usr/local/x-ui/x-ui.db
 ```
+*یعنی دیتابیس داخل Volume باقی می‌ماند و با حذف/recreate شدن Container از بین نمی‌رود.*
 
-یعنی دیتابیس داخل Volume باقی می‌ماند و با حذف/recreate شدن Container از بین نمی‌رود.
-
-### مدیریت مسیر پنل
-
-همچنین مسیر پنل از environment گرفته می‌شود:
-
+**مدیریت مسیر پنل:**
 ```bash
 PANEL_PATH=${PANEL_PATH:-/dashboard/}
 ```
-
 و بعد همان مقدار هم به Nginx و هم به خود x-ui داده می‌شود:
-
 ```bash
 ./x-ui setting -webBasePath "$PANEL_PATH"
 ```
-
 > این هماهنگی خیلی مهم است.
 
----
-
-## 3. nginx.conf
-
-اینجا قسمت پیچیده پروژه است. چهار نوع ترافیک عملاً در نظر گرفته شده:
+### 3. nginx.conf
+اچهار نوع ترافیک عملاً در نظر گرفته شده:
 
 ```text
                      Nginx :8080
@@ -251,10 +209,7 @@ PANEL_PATH=${PANEL_PATH:-/dashboard/}
                       127.0.0.1:3000
 ```
 
-### Router داینامیک برای Inboundها
-
-و سپس یک Router داینامیک برای اینباندها وجود دارد:
-
+**Router داینامیک برای Inboundها:**
 ```text
 /api/v<PORT>/...
         │
@@ -267,10 +222,38 @@ PANEL_PATH=${PANEL_PATH:-/dashboard/}
           grpc_pass
 ```
 
-### 🏗 ساختار فایل‌های جدید:
-
-*  متغیر **`entrypoint.sh`**: وظیفه جایگذاری (Inject) متغیرها در فایل `nginx.conf` با استفاده از دستور `sed` و تنظیم `webBasePath` پنل را بر عهده دارد.
-*  متغیر **`nginx.conf.template`**: به عنوان یک قالب عمل کرده و اجازه می‌دهد تمام مسیرها به صورت داینامیک ساخته شوند.
+**ساختار فایل‌های جدید:**
+- منغیر `entrypoint.sh`: وظیفه جایگذاری (Inject) متغیرها در فایل `nginx.conf` با استفاده از دستور `sed` و تنظیم `webBasePath` پنل را بر عهده دارد.
+- متغیر `nginx.conf.template`: به عنوان یک قالب عمل کرده و اجازه می‌دهد تمام مسیرها به صورت داینامیک ساخته شوند.
 
 </div>
 
+---
+
+## 📜 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+```text
+MIT License
+
+Copyright (c) 2026 NotDev
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+```
