@@ -17,9 +17,9 @@
   <img src="https://img.shields.io/badge/Ubuntu-E95420?style=for-the-badge&logo=ubuntu&logoColor=white" alt="Ubuntu" />
 </p>
 
-<p align="center">
-  <strong>یک پکیج راه‌اندازی بهینه برای اجرای پنل 3x-ui روی پلتفرم‌های ابری با حافظه دائمی</strong>
-</p>
+<h3 align="center">
+  <mark>یک پکیج راه‌اندازی بهینه برای اجرای پنل 3x-ui روی پلتفرم‌های ابری با حافظه دائمی</mark>
+</h3>
 
 ---
 
